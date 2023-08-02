@@ -98,13 +98,15 @@ export const Slider = () => {
       `,
             ],
         };
-
+        //@ts-ignore
         Object.assign(swiperContainer, params);
+        //@ts-ignore
         swiperContainer.initialize();
     }, []);
 
-    return (
-        <swiper-container ref={swiperRef} init="false">
+    return ( 
+        //@ts-ignore
+        <swiper-container ref={swiperRef} init="false"> {/*@ts-ignore */}
             {people.map(person => <swiper-slide key={person.id} class="slide">
                 <Slide 
                     id={person.id}
@@ -112,8 +114,8 @@ export const Slider = () => {
                     image={person.image}
                     name={person.name}
                     title={person.title}
-                />
-                </swiper-slide>)}
+                />{/*@ts-ignore */}
+                </swiper-slide>)}{/*@ts-ignore */}
         </swiper-container>
     )
 }
