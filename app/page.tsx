@@ -200,7 +200,7 @@ export default function Home() {
                   fontSize='1.25rem'
                   color='#344767'
                   minWidth={isMobile ? 'calc(100vw - 64px)' : { sm: 400 }} maxWidth={800} textAlign='center' width='75vw'>
-                  Værktøjer er bedst når de bliver brugt: så få tips og tricks, og inspiration direkte i indbakken og deltag automatisk i QuizEdu sjove konkurrencer.
+                  Værktøjer er bedst når de bliver brugt: så få tips og tricks, og inspiration direkte i indbakken og deltag automatisk i QuizEdus sjove konkurrencer.
                 </Typography>
                 <form onSubmit={(e) => {
                   e.preventDefault()
