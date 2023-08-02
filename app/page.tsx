@@ -992,12 +992,15 @@ export default function Home() {
                   marginBottom='1rem'
                   fontFamily='Asap'
                   component='p'>
-                  Har din skole ikke adgang til Geekster; så få din skole til at
-                  oprette sig allerede i dag og oplev selv, hvor sjov og effektiv færdighedstræning
-                  kan være med vores Quizværktøj. Vi tilbyder en gratis prøveperiode, så du kan
-                  udforske alle vores funktioner og se, hvordan QuizEdu kan berige din
-                  undervisning og dine elevers læring. Tag springet og giv dine elever en
-                  læringsoplevelse de selv vil efterspørge.
+                  Har din skole ikke adgang til Geekster eller QuizEdu; så få din skole til at købe adgang allerede i dag og oplev selv, hvor sjov og effektiv færdighedstræning kan være med vores Quizværktøj. Vi tilbyder en gratis prøvemåned, så du kan udforske alle vores funktioner og se, hvordan QuizEdu kan berige din undervisning og dine elevers læring. Tag springet og giv dine elever en læringsoplevelse de selv vil efterspørge.
+                  </Typography>
+                <Typography
+                  fontSize='20px'
+                  lineHeight='33px'
+                  color='#344767'
+                  marginBottom='1rem'
+                  fontFamily='Asap'
+                  component='p'>
                   Mvh Jesper Albinus
                 </Typography>
               </Box>
