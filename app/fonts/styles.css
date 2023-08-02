@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Teen;
+    src: url("/teen_lt.woff") format("opentype");
+}
+
+.font-teen {
+    font-family: Teen !important
+}
+
+.text-green {
+    color: #a1cd63 !important;
+}
+
+.bolder-text {
+    font-weight: bolder;
+}
+
+
+.text-purple {
+    color: #bf78f7;
+}
+
+.text-blue {
+    color: #51b9f3 !important;
+}
