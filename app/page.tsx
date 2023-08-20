@@ -43,6 +43,7 @@ import styles from './page.module.css'
 import Image from 'next/image';
 import Link from 'next/link';
 import { theme } from './theme';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [loading, setLoading] = useState(true)
@@ -69,6 +70,7 @@ export default function Home() {
   //   [enqueueSnackbar, closeSnackbar]
   // );
 
+  const router = useRouter()
   const closePopUp = () => {
     // setting key "seenPopUp" with value true into localStorage
     localStorage.setItem("seenPopUp", String(true));
@@ -155,8 +157,8 @@ export default function Home() {
           action={{
             type: "internal",
             route: "/authentication/sign-up",
-            label: "Opret dig gratis",
-            clickButton: setHasClickedOnCreateAccount,
+            label: "Få skoleadgang i dag",
+            clickButton: () => router.push('/pris'),
             color: "error",
           }}
         />{displayPopUp && (
@@ -404,9 +406,9 @@ export default function Home() {
                             }
                           }}
                           color='error'
-                          onClick={() => setHasClickedOnCreateAccount(true)}
+                          onClick={() => router.push('/pris')}
                           variant='contained'
-                        >Opret dig gratis</Button>
+                        >Få skoleadgang i dag</Button>
                       </Box>
 
                       <Box
@@ -925,9 +927,10 @@ export default function Home() {
               </Box>
 
               <Box
+                mt='80px'
                 // textAlign='center'
                 mx='auto'
-                width='calc(100vw - 30rem)'
+                width='calc(100vw - 30%)'
               >
                 <Typography
                   fontSize='20px'
@@ -1159,7 +1162,7 @@ export default function Home() {
                     fontSize='1.25rem'
                     lineHeight={1.625}
                     color='#344767'
-                    textAlign={'center'}>{(new Date()).getFullYear()} QuizEdu.dk. Alle rettigheder forbeholdes</Typography>
+                    textAlign='center'>{(new Date()).getFullYear()} QuizEdu.dk. Alle rettigheder forbeholdes</Typography>
                 </Box>
               </Box>
             </Box>

@@ -8,7 +8,7 @@ const nextConfig = {
             },
             {
                 source: '/:path*',
-                destination: 'https://main.d2qvgw8mvqn9ck.amplifyapp.com/:path*',
+                destination: 'http://localhost:4000/:path*', //https://main.d2qvgw8mvqn9ck.amplifyapp.com/:path*
             }
         ]
     }

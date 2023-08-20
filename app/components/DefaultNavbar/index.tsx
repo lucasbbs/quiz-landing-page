@@ -502,7 +502,7 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
             <Box
               whiteSpace='nowrap'
               display="inline-block">
-              <Button
+              {/* <Button
                 color="success"
                 variant='contained'
                 sx={{
@@ -524,7 +524,7 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
                 }}
               >
                 Pris
-              </Button>
+              </Button> */}
               <Button
                 color="primary"
                 variant='outlined'
