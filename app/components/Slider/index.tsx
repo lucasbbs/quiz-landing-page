@@ -2,7 +2,7 @@
 import { Box, Card, Icon, useMediaQuery, Button, Typography, IconButton } from '@mui/material'
 import { useState, useEffect, useRef } from 'react'
 import './styles.css'
-import testimonial1 from './Line Hornbæk.png'
+import testimonial1 from './Line Hornbaek.png'
 import testimonial2 from './Mikkel Ilve.jpg'
 import testimonial3 from './Maria Vedsted.jpg'
 import testimonial4 from './Peter Elsbo.jpg'
