@@ -22,7 +22,7 @@ import './styles.css';
 const people: any[] = [
     {
         id: 1,
-        image: '/linehonbæk.png',
+        image: testimonial1,
         name: 'Line Hornbæk',
         title: 'Lærer',
         quote: `Det er virkelig smart og ligetil.
