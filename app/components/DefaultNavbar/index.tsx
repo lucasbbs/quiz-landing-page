@@ -1,9 +1,4 @@
-import { useState, useEffect, ReactNode, Fragment } from "react";
-
-// react-router components
-
-
-// @mui material components
+import { useState, ReactNode, Fragment } from "react";
 import Icon from "@mui/material/Icon";
 import Popper from "@mui/material/Popper";
 import Grow, { GrowProps } from "@mui/material/Grow";
@@ -11,23 +6,12 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import MuiLink from "@mui/material/Link";
 import Container from "@mui/material/Container";
-import { Theme } from "@mui/material/styles";
-
-// Material Dashboard 2 PRO React TS components
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-
-// Material Dashboard 2 PRO React TS Base Styles
-import { breakpoints } from "../../theme";
-
-// Material Dashboard 2 PRO React context
 import { useMediaQuery } from '@mui/material';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
-// Declaring props types for DefaultNavbar
 interface Props {
   routes: {
     [key: string]:
@@ -40,6 +24,7 @@ interface Props {
   brand?: string;
   transparent?: boolean;
   light?: boolean;
+  isMobile: boolean
   action?: {
     type: "external" | "internal";
     route: string;
@@ -58,49 +43,17 @@ function NewGrow(props: NewGrowTypes) {
   return <Grow {...props} />;
 }
 
-function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JSX.Element {
+function DefaultNavbar({ routes, transparent, light, action, isMobile }: Props): JSX.Element {
 
   const [dropdown, setDropdown] = useState<any>("");
-  const [dropdownEl, setDropdownEl] = useState<any>("");
   const [dropdownName, setDropdownName] = useState<any>("");
   const [nestedDropdown, setNestedDropdown] = useState<any>("");
   const [nestedDropdownEl, setNestedDropdownEl] = useState<any>("");
   const [nestedDropdownName, setNestedDropdownName] = useState<any>("");
   const [arrowRef, setArrowRef] = useState<any>(null);
-  const [mobileNavbar, setMobileNavbar] = useState<boolean>(false);
-  const [mobileView, setMobileView] = useState<boolean>(false);
-
-  const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
-
-  useEffect(() => {
-    function displayMobileNavbar() {
-      if (window.innerWidth < breakpoints.values.lg) {
-        setMobileView(true);
-        setMobileNavbar(false);
-      } else {
-        setMobileView(false);
-        setMobileNavbar(false);
-      }
-    }
-
-    /** 
-     The event listener that's calling the displayMobileNavbar function when 
-     resizing the window.
-    */
-    window.addEventListener("resize", displayMobileNavbar);
-
-    // Call the displayMobileNavbar function to set the state with the initial value.
-    displayMobileNavbar();
-
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", displayMobileNavbar);
-  }, []);
-
-  // Render the routes on the dropdown menu
+  
   const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }: any) => {
     let template;
-
-    // Render the dropdown menu that should be display as columns
     if (collapse && columns && name === dropdownName) {
       const calculateColumns = collapse.reduce((resultArray: any, item: any, index: any) => {
         const chunkIndex = Math.floor(index / rowsPerColumn);
@@ -157,27 +110,11 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
                     {col.collapse.map((item: any) => (
                       <Typography
                         key={item.name}
-                        // to={item.route ? item.route : ""}
-                        // href={item.href ? item.href : (e: any) => e.preventDefault()}
-                        // target={item.href ? "_blank" : ""}
                         rel={item.href ? "noreferrer" : "noreferrer"}
-                        // minWidth="11.25rem"
-                        // display="block"
-                        // variant="button"
-                        // color="text"
-                        // textTransform="capitalize"
-                        // fontWeight="regular"
-                        // py={0.625}
-                        // px={2}
                         sx={{
                           borderRadius: '0.375rem',
                           cursor: "pointer",
-                          transition: "all 300ms linear",
-
-                          "&:hover": {
-                            // backgroundColor: grey[200],
-                            // color: dark.main,
-                          },
+                          transition: "all 300ms linear"
                         }}
                       >
                         {item.name}
@@ -204,7 +141,6 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
         </Grid>
       );
 
-      // Render the dropdown menu that should be display as list items
     } else if (collapse && name === dropdownName) {
       template = collapse.map((item: any) => {
         const linkComponent = {
@@ -291,7 +227,6 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
     return template;
   });
 
-  // Routes dropdown menu
   const dropdownMenu = (
     <Popper
       anchorEl={dropdown}
@@ -309,7 +244,7 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
           },
         },
       ]}
-      onMouseEnter={() => setDropdown(dropdownEl)}
+      onMouseEnter={() => {}}
       onMouseLeave={() => {
         if (!nestedDropdown) {
           setDropdown(null);
@@ -344,7 +279,6 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
     </Popper>
   );
 
-  // Render routes that are nested inside the dropdown menu routes
   const renderNestedRoutes = routes.map(({ collapse, columns }: any) =>
     collapse && !columns
       ? collapse.map(({ name: parentName, collapse: nestedCollapse }: any) => {
@@ -420,7 +354,6 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
       : null
   );
 
-  // Dropdown menu for the nested dropdowns
   const nestedDropdownMenu = (
     <Popper
       anchorEl={nestedDropdown}
@@ -460,8 +393,6 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
   );
   const isLargeScreen = useMediaQuery('(min-width:1280px)')
   const isSmallScreen = useMediaQuery('(max-width:600px)')
-  const isMobile = useMediaQuery('(max-width:520px)')
-  const router = useRouter()
 
   return (
     <Container>
@@ -502,29 +433,6 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
             <Box
               whiteSpace='nowrap'
               display="inline-block">
-              {/* <Button
-                color="success"
-                variant='contained'
-                sx={{
-                  boxShadow: '0rem 0.1875rem 0.1875rem 0rem rgb(76 175 80 / 15%), 0rem 0.1875rem 0.0625rem -0.125rem rgb(76 175 80 / 20%), 0rem 0.0625rem 0.3125rem 0rem rgb(76 175 80 / 15%)',
-                  fontFamily: 'Asap',
-                  fontWeight: 700,
-                  backgroundColor: '#4caf50',
-                  fontSize: isSmallScreen ? '1rem' : '1.2rem',
-                  paddingX: isSmallScreen ? 2 :3,
-                  borderRadius: 45,
-                  marginRight: isLargeScreen ? 4 : isSmallScreen ? 1 : 2,
-                  '&:hover': {
-                    backgroundColor: '#4caf50',
-                    boxShadow: '0rem 0.875rem 1.625rem -0.75rem rgb(76 175 80 / 40%), 0rem 0.25rem 1.4375rem 0rem rgb(76 175 80 / 15%), 0rem 0.5rem 0.625rem -0.3125rem rgb(76 175 80 / 20%)',
-                  }
-                }}
-                onClick={() => {
-                  router.push('/pris')
-                }}
-              >
-                Pris
-              </Button> */}
               <Button
                 color="primary"
                 variant='outlined'
@@ -539,11 +447,9 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
                   paddingX: isLargeScreen ? 5 : 2,
                   marginRight: isLargeScreen ? 4 : isSmallScreen ? 1 : 2,
                 }}
-                onClick={() => {
-                    router.push('/cards/generator')
-                }}
+                onClick={() => {}}
               >
-                 Fortsæt
+                 Velit
               </Button>
               <Button
                 onClick={() => action.clickButton(true)}
@@ -592,9 +498,8 @@ function DefaultNavbar({ routes, brand, transparent, light, action }: Props): JS
   );
 }
 
-// Declaring default props for DefaultNavbar
 DefaultNavbar.defaultProps = {
-  brand: "QuizEdu.dk",
+  brand: "Quiz",
   transparent: false,
   light: false,
   action: false,

@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Card, Icon, useMediaQuery, Button, Typography, IconButton } from '@mui/material'
-import { useState, useEffect, useRef } from 'react'
+import { Box, Card, Typography } from '@mui/material'
+import { useEffect, useRef } from 'react'
 import './styles.css'
-import testimonial1 from './Line Hornbaek.png'
-import testimonial2 from './Mikkel Ilve.jpg'
-import testimonial3 from './Maria Vedsted.jpg'
-import testimonial4 from './Peter Elsbo.jpg'
+import testimonial1 from './testimonial1.jpg'
+import testimonial2 from './testimonial2.jpg'
+import testimonial3 from './testimonial3.jpg'
+import testimonial4 from './testimonial4.jpg'
+import testimonial5 from "./testimonial5.jpg";
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight, FormatQuote } from '@mui/icons-material';
+import { FormatQuote } from '@mui/icons-material';
 import { register } from "swiper/element/bundle";
 register();
 
@@ -23,39 +24,41 @@ const people: any[] = [
     {
         id: 1,
         image: testimonial1,
-        name: 'Line Hornbæk',
-        title: 'Lærer',
-        quote: `Det er virkelig smart og ligetil.
-        Med få klik kan jeg sammensætte en quiz
-        som eleverne elsker.`
+        name: 'Anna Mitchell',
+        title: 'Lawyer',
+        quote: `Quo veniam beatae ullam, numquam cupiditate architecto, soluta impedit vero explicabo distinctio earum voluptatibus maiores vitae hic magnam exercitationem necessitatibus aut minus.`
     },
     {
         id: 2,
         image: testimonial2,
-        name: 'Mikkel Ilve',
-        title: 'Lærer',
-        quote: `SÅ mange muligheder med SÅ mange gode 
-        quizspørgsmål!`
+        name: 'Julian Rice',
+        title: 'Accountant',
+        quote: `Velit, molestias quam. Sit aliquam illum minima voluptatum in amet! Maxime quia et beatae corporis, iure dolores consequatur natus voluptatibus velit cum?`
     },
     {
         id: 3,
         image: testimonial3,
-        name: 'Maria Vedsted',
-        title: 'Lærer',
-        quote: `Quiz og brætspil er en fantastisk måde
-        at arbejde med mundtlighed på, og eleverne
-        hygger sig virkelig.`
+        name: 'Mark Lee',
+        title: 'Business Analyst',
+        quote: `Quae voluptas eveniet voluptate commodi non, nam consequuntur unde laudantium, quod libero tenetur dolor nostrum earum at velit facilis natus fugit facere.`
     },
     {
         id: 4,
         image: testimonial4,
-        name: 'Peter Elsbo',
-        title: 'Lærer',
-        quote: `En fantastisk blanding af det digitale og det analoge`
+        name: 'Martha Gilbert',
+        title: 'Data Architect',
+        quote: `Exercitationem optio delectus adipisci, suscipit vero neque autem accusamus! Saepe totam blanditiis deserunt nesciunt esse nulla temporibus aliquid? Asperiores itaque cum nobis!`
     },
+    {
+        id: 5,
+        image: testimonial5,
+        name: 'Nevaeh Johnson',
+        title: 'Full Stack Developer',
+        quote: 'Quisquam itaque ratione, repellendus dolor inventore nobis mollitia repudiandae asperiores. Magni rerum atque odit recusandae, vero soluta dolor amet. Ipsum, incidunt inventore.'
+    }
 ]
 
-export const Slider = () => {
+const Slider = ({ isMediumScreen, isMobile }) => {
 
     const swiperRef = useRef(null);
 
@@ -68,7 +71,6 @@ export const Slider = () => {
                 delay: 8000,
                 disableOnInteraction: false,
             },
-            //add this
             injectStyles: [
                 `
           .swiper-button-next,
@@ -104,19 +106,41 @@ export const Slider = () => {
         swiperContainer.initialize();
     }, []);
 
-    return ( 
-        //@ts-ignore
-        <swiper-container ref={swiperRef} init="false"> {/*@ts-ignore */}
-            {people.map(person => <swiper-slide key={person.id} class="slide">
-                <Slide 
-                    id={person.id}
-                    quote={person.quote}
-                    image={person.image}
-                    name={person.name}
-                    title={person.title}
-                />{/*@ts-ignore */}
-                </swiper-slide>)}{/*@ts-ignore */}
-        </swiper-container>
+    return (
+        <Box
+            width='100vw'
+            sx={{
+                backgroundColor: '#f4feff'
+            }}
+        >
+            <Box
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+                height='700px'
+                width={isMobile ? 420 : isMediumScreen ? '100vw' : 600}
+                marginX='auto'
+                sx={{
+                    backgroundColor: '#f4feff'
+                }}
+                position='relative'
+            >
+                {/* @ts-ignore */}
+                <swiper-container ref={swiperRef} init="false"> {/*@ts-ignore */}
+                    {people.map(person => <swiper-slide key={person.id} class="slide">
+                        <Slide
+                            isMediumScreen={isMediumScreen}
+                            isMobile={isMobile}
+                            id={person.id}
+                            quote={person.quote}
+                            image={person.image}
+                            name={person.name}
+                            title={person.title}
+                        />{/*@ts-ignore */}
+                    </swiper-slide>)}{/*@ts-ignore */}
+                </swiper-container>
+            </Box>
+        </Box>
     )
 }
 
@@ -126,17 +150,17 @@ type SlideProps = {
     image: string,
     name: string,
     title: string
+    isMobile: boolean
+    isMediumScreen: boolean
 }
 
-const Slide = ({id, quote, image, name, title}: SlideProps) => {
-    const isMediumScreen = useMediaQuery('(max-width:760px)')
-    const isMobile = useMediaQuery('(max-width:499px)')
+const Slide = ({ id, quote, image, name, title, isMobile, isMediumScreen }: SlideProps) => {
     return (
         <article key={id}>
             <Box
                 marginX='auto'
                 sx={{
-                    paddingTop:20,
+                    paddingTop: 20,
                     minWidth: isMobile ? 300 : isMediumScreen ? 350 : 400,
                     maxWidth: isMobile ? 300 : isMediumScreen ? 380 : 450,
 
@@ -194,3 +218,5 @@ const Slide = ({id, quote, image, name, title}: SlideProps) => {
         </article>
     )
 }
+
+export default Slider

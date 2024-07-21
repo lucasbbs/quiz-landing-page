@@ -1,22 +1,28 @@
-import ReactPlayer from "react-player";
+import YouTubePlayer from "react-player/youtube";
+import { TikTok } from "react-tiktok";
 
 interface Props {
-  
+
 }
 
-function VideosSection({...props}: Props): JSX.Element {
-  const vimeoVideoIds = [
-    "817935071",
-    "817944807",
-    "817938625",
+function VideosSection({ ...props }: Props): JSX.Element {
+  const tiktokVideoIds = [
+    "QdSSvXdG0p0",
+    "axGtxZNYqyU",
+    "Fub7yOyHciU",
+    "PzNHyk2JAas",
+    "EocJm3Dry4E"
   ];
   return (
     <div
-    {...props}
-     style={{display:'flex', gap: 150}}>
-      {vimeoVideoIds.map((id) => (
-        <ReactPlayer key={id} url={`https://player.vimeo.com/video/${id}`} controls />
-      ))}
+      {...props}
+      style={{ display: 'flex', gap: 150 }}>
+      {tiktokVideoIds.map(v =>
+        <YouTubePlayer key={v} opts={{
+          height: 640,
+          width: 390,
+        }} url={`https://youtu.be/${v}`} />
+      )}
     </div>
   );
 }
